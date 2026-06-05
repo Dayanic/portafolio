@@ -1,0 +1,164 @@
+---
+import type { IMeta } from '../types/portfolio';
+
+interface Props {
+  esMeta: IMeta;
+  enMeta: IMeta;
+}
+
+const { esMeta, enMeta } = Astro.props;
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+
+<!doctype html>
+<html lang="es" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{esMeta.title}</title>
+    <meta name="description" content={esMeta.description} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={esMeta.title} />
+    <meta property="og:description" content={esMeta.description} />
+    <meta property="og:image" content={`${esMeta.url}${esMeta.ogImage}`} />
+    <meta property="og:url" content={esMeta.url} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={esMeta.url} />
+    <link rel="alternate" hreflang="es" href={esMeta.url} />
+    <link rel="alternate" hreflang="en" href={esMeta.url} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!--
+      Anti-FOUC: aplica tema e idioma antes de que el navegador pinte.
+      Al correr en <head> (síncrono), la clase ya está en <html> cuando
+      el browser calcula los estilos del body, eliminando el parpadeo.
+    -->
+    <script is:inline>
+      (function () {
+        // Tema
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (storedTheme === 'light' || (!storedTheme && !prefersDark)) {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+
+        // Idioma: lang-en en <html> activa el bloque EN y oculta ES vía CSS
+        const savedLang = localStorage.getItem('preferred-lang');
+        const lang = savedLang || (navigator.language.toLowerCase().startsWith('en') ? 'en' : 'es');
+        if (lang === 'en') {
+          document.documentElement.classList.add('lang-en');
+          document.documentElement.lang = 'en';
+        }
+      })();
+    </script>
+
+    <!-- Google Analytics (solo en producción) -->
+    {import.meta.env.PROD && gaId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId);
+        </script>
+      </>
+    )}
+  </head>
+
+  <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 antialiased transition-colors duration-300">
+    <slot />
+
+    <!-- switchLang: función global para el toggle de idioma sin recarga -->
+    <script is:inline define:vars={{ esMeta, enMeta }}>
+      window.switchLang = function (lang) {
+        if (lang === 'en') {
+          document.documentElement.classList.add('lang-en');
+        } else {
+          document.documentElement.classList.remove('lang-en');
+        }
+        document.documentElement.lang = lang;
+        localStorage.setItem('preferred-lang', lang);
+
+        // Actualiza title y meta description
+        const meta = lang === 'en' ? enMeta : esMeta;
+        document.title = meta.title;
+        const desc = document.querySelector('meta[name="description"]');
+        if (desc) desc.setAttribute('content', meta.description);
+
+        // Activa animaciones en los elementos recién visibles
+        document.querySelectorAll('[data-lang="' + lang + '"] .animate-on-scroll:not(.is-visible)').forEach(function (el) {
+          if (window.__animObserver) window.__animObserver.observe(el);
+        });
+      };
+    </script>
+
+    <!-- Animaciones de scroll con IntersectionObserver -->
+    <script is:inline>
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
+        window.__animObserver = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                window.__animObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+        // Solo observa elementos del idioma activo al cargar
+        var activeLang = document.documentElement.lang || 'es';
+        document.querySelectorAll('[data-lang="' + activeLang + '"] .animate-on-scroll').forEach(function (el) {
+          window.__animObserver.observe(el);
+        });
+      } else {
+        document.querySelectorAll('.animate-on-scroll').forEach(function (el) {
+          el.classList.add('is-visible');
+        });
+      }
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  @import 'tailwindcss';
+
+  /* Tailwind v4: dark mode basado en clase .dark en <html> */
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  /* ── Idioma show/hide ──────────────────────────────────────────────
+     Por defecto se muestra ES y se oculta EN.
+     Al agregar lang-en a <html> se invierte sin recarga de página.
+  ─────────────────────────────────────────────────────────────────── */
+  [data-lang="en"] { display: none !important; }
+  html.lang-en [data-lang="en"] { display: block !important; }
+  html.lang-en [data-lang="es"] { display: none !important; }
+
+  /* ── Animaciones de scroll ──────────────────────────────────────── */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #14b8a6; border-radius: 3px; }
+</style>

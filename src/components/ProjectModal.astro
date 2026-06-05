@@ -1,0 +1,121 @@
+---
+import { ui } from '../i18n/ui';
+
+// Ambos conjuntos de etiquetas disponibles en runtime para detectar idioma activo
+const esL = ui['es'];
+const enL = ui['en'];
+---
+
+<div
+  id="project-modal"
+  class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <div
+    id="modal-content"
+    class="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700"
+  >
+    <button
+      id="modal-close"
+      aria-label="Close / Cerrar"
+      class="absolute top-4 right-4 p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors z-10"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <div class="p-6 sm:p-8">
+      <p id="modal-year" class="text-xs font-semibold text-teal-500 uppercase tracking-widest mb-2"></p>
+      <h2 id="modal-title" class="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-2 pr-8"></h2>
+      <p id="modal-role" class="text-sm text-slate-500 dark:text-slate-400 mb-6"></p>
+      <p id="modal-description" class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6"></p>
+
+      <div class="mb-6">
+        <p id="modal-tech-label" class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3"></p>
+        <div id="modal-technologies" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div id="modal-links" class="flex flex-wrap gap-3"></div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ esL, enL }}>
+  const modal = document.getElementById('project-modal');
+  const modalClose = document.getElementById('modal-close');
+
+  function getLabels() {
+    return document.documentElement.lang === 'en' ? enL : esL;
+  }
+
+  function openModal(project) {
+    const L = getLabels();
+    document.getElementById('modal-title').textContent = project.title;
+    document.getElementById('modal-year').textContent = L['projects.year'] + ': ' + project.year;
+    document.getElementById('modal-role').textContent = L['projects.role'] + ': ' + project.role;
+    document.getElementById('modal-description').textContent = project.description;
+    document.getElementById('modal-tech-label').textContent = L['projects.technologies'];
+
+    const techContainer = document.getElementById('modal-technologies');
+    techContainer.innerHTML = '';
+    project.technologies.forEach((tech) => {
+      const span = document.createElement('span');
+      span.className = 'px-3 py-1 text-xs font-medium bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/20 rounded-full';
+      span.textContent = tech;
+      techContainer.appendChild(span);
+    });
+
+    const linksContainer = document.getElementById('modal-links');
+    linksContainer.innerHTML = '';
+    if (project.hasLink) {
+      if (project.liveUrl) {
+        const a = document.createElement('a');
+        a.href = project.liveUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'inline-flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-medium rounded-xl transition-colors';
+        a.textContent = L['projects.view_live'];
+        linksContainer.appendChild(a);
+      }
+      if (project.repoUrl) {
+        const a = document.createElement('a');
+        a.href = project.repoUrl;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'inline-flex items-center gap-2 px-4 py-2 border border-teal-500 text-teal-500 dark:text-teal-400 hover:bg-teal-500 hover:text-white text-sm font-medium rounded-xl transition-colors';
+        a.textContent = L['projects.view_repo'];
+        linksContainer.appendChild(a);
+      }
+    }
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => modalClose?.focus(), 50);
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  modalClose?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
+
+  document.querySelectorAll('[data-project]').forEach((card) => {
+    card.addEventListener('click', () => openModal(JSON.parse(card.getAttribute('data-project'))));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal(JSON.parse(card.getAttribute('data-project')));
+      }
+    });
+  });
+</script>

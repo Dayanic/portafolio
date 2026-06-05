@@ -1,0 +1,30 @@
+---
+---
+
+<!--
+  No usamos data-lang en los <span> para evitar que el CSS global
+  (display: block !important) rompa el display inline de los spans.
+  En su lugar, clases dedicadas controladas por html.lang-en.
+-->
+<button
+  id="lang-toggle"
+  aria-label="Switch language / Cambiar idioma"
+  class="px-3 py-1.5 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors uppercase tracking-wider"
+>
+  <span class="lang-label-es">EN</span>
+  <span class="lang-label-en">ES</span>
+</button>
+
+<style>
+  /* Muestra el label del idioma al que se puede cambiar */
+  .lang-label-en { display: none; }
+  :global(html.lang-en) .lang-label-en { display: inline; }
+  :global(html.lang-en) .lang-label-es { display: none; }
+</style>
+
+<script>
+  document.getElementById('lang-toggle')?.addEventListener('click', () => {
+    const current = document.documentElement.lang;
+    (window as unknown as { switchLang: (l: string) => void }).switchLang(current === 'en' ? 'es' : 'en');
+  });
+</script>

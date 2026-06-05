@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dayanestefania.dev/sitemap-index.xml

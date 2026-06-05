@@ -1,0 +1,92 @@
+---
+import type { ISkills } from '../types/portfolio';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  skills: ISkills;
+  lang: Lang;
+}
+
+const { skills, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="py-20 bg-white dark:bg-slate-800/50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="animate-on-scroll">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2">
+        {t('skills.title')}
+      </h2>
+      <div class="w-16 h-1 bg-teal-500 rounded-full mb-10"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Technical skills -->
+      <div class="animate-on-scroll">
+        <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 bg-teal-500 rounded-full" aria-hidden="true"></span>
+          {t('skills.technical')}
+        </h3>
+        <ul class="flex flex-col gap-5" role="list">
+          {skills.technical.map((skill) => (
+            <li>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">{skill.level}%</span>
+              </div>
+              <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={skill.name}>
+                <div
+                  class="h-full bg-teal-500 rounded-full transition-all duration-1000 ease-out skill-bar"
+                  style={`width: 0%; --target-width: ${skill.level}%`}
+                ></div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Soft skills -->
+      <div class="animate-on-scroll">
+        <h3 class="text-lg font-semibold text-slate-700 dark:text-slate-300 mb-6 flex items-center gap-2">
+          <span class="w-2 h-2 bg-teal-500 rounded-full" aria-hidden="true"></span>
+          {t('skills.soft')}
+        </h3>
+        <ul class="flex flex-col gap-5" role="list">
+          {skills.soft.map((skill) => (
+            <li>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{skill.name}</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400">{skill.level}%</span>
+              </div>
+              <div class="h-2 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden" role="progressbar" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={skill.name}>
+                <div
+                  class="h-full bg-teal-500 rounded-full transition-all duration-1000 ease-out skill-bar"
+                  style={`width: 0%; --target-width: ${skill.level}%`}
+                ></div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const bar = entry.target as HTMLElement;
+          const target = bar.style.getPropertyValue('--target-width');
+          bar.style.width = target;
+          observer.unobserve(bar);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  document.querySelectorAll('.skill-bar').forEach((bar) => observer.observe(bar));
+</script>

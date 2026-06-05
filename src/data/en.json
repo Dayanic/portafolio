@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "Dayane Coronado Guzmán — Computer Engineering",
+    "description": "Professional portfolio of Dayane Coronado Guzmán, Technical Project Manager and Senior Backend Developer with over 7 years of experience.",
+    "url": "https://dayanestefania.dev",
+    "ogImage": "/og-image.jpg"
+  },
+  "hero": {
+    "name": "Dayane Coronado Guzmán",
+    "title": "Computer Engineer",
+    "roles": [
+      "Technical Project Manager",
+      "Software Engineering Leader",
+      "Senior BackEnd Developer"
+    ],
+    "location": "Santiago, Chile",
+    "avatar": "/avatar.jpg",
+    "cv": "/cv-en.pdf",
+    "cvAvailable": true
+  },
+  "about": {
+    "summary": "Experienced Software Development professional with a strong background in designing, developing, and optimizing web-based solutions. Proven ability to lead cross-functional teams, implement process improvements, and deliver high-quality projects on time. Adept at combining technical expertise with leadership to drive efficiency and innovation."
+  },
+  "technologies": [
+    { "name": "C# / VB / .NET", "level": "expert", "category": "backend" },
+    { "name": "JavaScript", "level": "intermediate", "category": "frontend" },
+    { "name": "Oracle PL/SQL", "level": "expert", "category": "database" },
+    { "name": "SQL Server", "level": "intermediate", "category": "database" },
+    { "name": "Git / GitHub", "level": "intermediate", "category": "devops" },
+    { "name": "SVN (Subversion)", "level": "expert", "category": "devops" },
+    { "name": "Team Foundation (TFVC)", "level": "expert", "category": "devops" },
+    { "name": "Azure DevOps CI/CD pipelines", "level": "intermediate", "category": "devops" },
+    { "name": "JIRA", "level": "intermediate", "category": "devops" },
+    { "name": "NPM", "level": "intermediate", "category": "other" },
+    { "name": "HTML", "level": "intermediate", "category": "frontend" }
+  ],
+  "skills": {
+    "technical": [
+      { "name": "Software Architecture", "level": 90 },
+      { "name": "Web development", "level": 90 },
+      { "name": "API integration", "level": 70 },
+      { "name": "Database optimization", "level": 90 },
+      { "name": "Code quality review", "level": 95 },
+      { "name": "Agile planning", "level": 90 },
+      { "name": "Process automation", "level": 70 },
+      { "name": "Performance tuning", "level": 70 }
+    ],
+    "soft": [
+      { "name": "Leadership", "level": 95 },
+      { "name": "Problem Solving", "level": 95 },
+      { "name": "Communication", "level": 92 },
+      { "name": "Collaboration", "level": 92 },
+      { "name": "Multicultural Teamwork", "level": 90 }
+    ]
+  },
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "Everest Insurance International Deployment",
+      "summary": "Coordination of the insurance system deployment across Chile, Mexico, and Colombia.",
+      "description": "I led the international deployment of the insurance management system for Everest Insurance, coordinating teams across Chile, Mexico, and Colombia. The project included regional system parameterization, integration with local APIs for each country, historical data migration, and training for local teams. As a result, we reduced the time to onboard new markets by 40% and standardized operational processes across the three subsidiaries.",
+      "technologies": [".NET", "PL/SQL", "Oracle DB", "Azure DevOps"],
+      "liveUrl": "",
+      "repoUrl": "",
+      "hasLink": false,
+      "year": "2023",
+      "role": "Technical Project Manager"
+    },
+    {
+      "id": "project-2",
+      "title": "Claims Processing Automation",
+      "summary": "Automation system for insurance claims processing.",
+      "description": "I designed and implemented a claims processing automation system that reduced response time from 5 days to less than 24 hours. The system integrates automatic validations, configurable approval workflows, and real-time notifications. BPM tools integrated with the core insurance system were used, improving customer satisfaction and reducing operational costs by 30%.",
+      "technologies": [".NET", "C#", "SQL Server", "JavaScript"],
+      "liveUrl": "",
+      "repoUrl": "",
+      "hasLink": false,
+      "year": "2022",
+      "role": "Senior Backend Developer & Tech Lead"
+    },
+    {
+      "id": "project-3",
+      "title": "Personal Portfolio",
+      "summary": "One-page website to showcase professional profile, projects, and experience.",
+      "description": "Personal portfolio development with Astro 6 (SSG), Tailwind CSS 4, and TypeScript. The site is fully data-driven: all content is managed from JSON files without touching component code. Includes bilingual support (ES/EN) with Astro's native i18n, FOUC-free dark/light theme system, scroll animations with IntersectionObserver, and automatic deployment on Vercel.",
+      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Vercel"],
+      "liveUrl": "https://dayanestefania.dev",
+      "repoUrl": "https://github.com/Dayanic/portafolio",
+      "hasLink": true,
+      "year": "2026",
+      "role": "Full Stack Developer"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "company": "Insurance Technology S.A.",
+      "role": "Senior IT Project Consultant",
+      "startDate": "01/2024",
+      "endDate": null,
+      "current": true,
+      "description": [
+        "Lead the planning, coordination, and execution of an international software implementation project for Everest (insurance industry), managing scope, requirements, resources, and stakeholder communication.",
+        "Led a multicultural team of 11 professionals, optimizing collaboration and productivity.",
+        "Automated all policy issuance processes through bulk data uploads, reducing processing time.",
+        "Increased team capacity by 50% through process improvements and resource optimization.",
+        "Achieved on-time deployment in Mexico and Colombia within one year, meeting all operational requirements, and secured client commitment for the upcoming Peru project in 2026."
+      ]
+    },
+    {
+      "id": "exp-2",
+      "company": "Insurance Technology S.A.",
+      "role": "Technical Lead / Software Engineer",
+      "startDate": "01/2018",
+      "endDate": "12/2023",
+      "current": false,
+      "description": [
+        "Managed the design, development, and optimization of software solutions, overseeing system enhancements, process automation, security improvements, and cross-team technical initiatives to ensure high-quality, on-time project delivery.",
+        "Oversaw the development of custom and bulk processing solutions for insurance operations, including Oracle PL/SQL–based workflows.",
+        "Managed and enhanced the VisualTime system, improving performance, usability, and user experience.",
+        "Introduced a SCRUM-based methodology adopted company-wide, improving delivery consistency and efficiency.",
+        "Standardized programming practices using Azure DevOps and GitHub across all development teams.",
+        "Implemented security measures for web applications and led technology upgrades for servers and database engines.",
+        "Coordinated agile sprint planning, system upgrades, and post-implementation improvements to critical processes.",
+        "Delivered releases with a 0% rejection rate from QA and clients while acting as the primary technical liaison, ensuring clear requirement definition and driving continuous improvement initiatives.",
+        "Provided mentorship and cross-team technical support, contributing to project stability and knowledge sharing."
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-1",
+      "name": "Canaway Technology Implementation",
+      "issuer": "Canaway",
+      "year": "2025",
+      "credentialUrl": "https://canawaymoodle.com/pluginfile.php/1/tool_certificate/issues/1748402136/1634997845DC.pdf"
+    },
+    {
+      "id": "cert-2",
+      "name": "NPM Package Management",
+      "issuer": "Platzi",
+      "year": "2023",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/3578-npm/diploma/detalle/"
+    },
+    {
+      "id": "cert-3",
+      "name": "JavaScript Clean Code",
+      "issuer": "Platzi",
+      "year": "2023",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/6240-javascript-clean-code/diploma/detalle/"
+    },
+    {
+      "id": "cert-4",
+      "name": "Git and GitHub",
+      "issuer": "Platzi",
+      "year": "2022",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/1557-git-github/diploma/detalle/"
+    }
+  ],
+  "contact": {
+    "email": "dayanne.cguzman@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/dayanecoronado",
+    "github": "https://github.com/Dayanic",
+    "showGithub": false
+  }
+}

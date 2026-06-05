@@ -1,0 +1,61 @@
+---
+import type { IExperience } from '../types/portfolio';
+import type { Lang } from '../i18n/ui';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  experience: IExperience[];
+  lang: Lang;
+}
+
+const { experience, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="py-20 bg-white dark:bg-slate-800/50">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="animate-on-scroll">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-2">
+        {t('experience.title')}
+      </h2>
+      <div class="w-16 h-1 bg-teal-500 rounded-full mb-10"></div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Vertical line -->
+      <div class="absolute left-4 sm:left-8 top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-700" aria-hidden="true"></div>
+
+      <ol class="flex flex-col gap-10" role="list">
+        {experience.map((job) => (
+          <li class="relative pl-12 sm:pl-20 animate-on-scroll">
+            <!-- Dot -->
+            <div class={`absolute left-3 sm:left-7 top-1.5 w-3 h-3 rounded-full border-2 ${job.current ? 'bg-teal-500 border-teal-500' : 'bg-white dark:bg-slate-900 border-slate-400 dark:border-slate-600'}`} aria-hidden="true"></div>
+
+            <!-- Card -->
+            <article class="bg-white dark:bg-slate-800 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-100 dark:border-slate-700">
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                <div>
+                  <h3 class="font-bold text-slate-900 dark:text-slate-50 text-lg">{job.role}</h3>
+                  <p class="text-teal-500 dark:text-teal-400 font-medium text-sm">{job.company}</p>
+                </div>
+                <span class="flex-shrink-0 text-xs text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1 rounded-full self-start sm:self-auto">
+                  {job.startDate} — {job.current ? t('experience.present') : job.endDate}
+                </span>
+              </div>
+
+              <ul class="flex flex-col gap-1.5 mt-1">
+                {job.description.map((item) => (
+                  <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal-500 flex-shrink-0" aria-hidden="true"></span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

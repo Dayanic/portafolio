@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "title": "Dayane Coronado Guzmán — Ingeniera en Informática",
+    "description": "Portafolio profesional de Dayane Coronado Guzmán, Technical Project Manager y Senior Backend Developer con más de 7 años de experiencia.",
+    "url": "https://dayanestefania.dev",
+    "ogImage": "/og-image.jpg"
+  },
+  "hero": {
+    "name": "Dayane Coronado Guzmán",
+    "title": "Ingeniera en Informática",
+    "roles": [
+      "Líder de Proyectos Tecnológicos",
+      "Líder de Ingeniería de Software",
+      "Desarrollador Back-End Senior"
+    ],
+    "location": "Santiago, Chile",
+    "avatar": "/avatar.jpg",
+    "cv": "/cv-es.pdf",
+    "cvAvailable": false
+  },
+  "about": {
+    "summary": "Profesional experimentado en Desarrollo de Software con una sólida trayectoria en el diseño, desarrollo y optimización de soluciones web. Capacidad comprobada para liderar equipos multifuncionales, implementar mejoras de procesos y entregar proyectos de alta calidad a tiempo. Hábil para combinar experiencia técnica con habilidades de liderazgo para impulsar la eficiencia y la innovación."
+  },
+  "technologies": [
+    { "name": "C# / VB / .NET", "level": "expert", "category": "backend" },
+    { "name": "JavaScript", "level": "intermediate", "category": "frontend" },
+    { "name": "Oracle PL/SQL", "level": "expert", "category": "database" },
+    { "name": "SQL Server", "level": "intermediate", "category": "database" },
+    { "name": "Git / GitHub", "level": "intermediate", "category": "devops" },
+    { "name": "SVN (Subversion)", "level": "expert", "category": "devops" },
+    { "name": "Team Foundation (TFVC)", "level": "expert", "category": "devops" },
+    { "name": "Azure DevOps CI/CD pipelines", "level": "intermediate", "category": "devops" },
+    { "name": "JIRA", "level": "intermediate", "category": "devops" },
+    { "name": "NPM", "level": "intermediate", "category": "other" },
+    { "name": "HTML", "level": "intermediate", "category": "frontend" }
+  ],
+  "skills": {
+    "technical": [
+      { "name": "Arquitectura de software", "level": 90 },
+      { "name": "Desarrollo Web", "level": 90 },
+      { "name": "Integración de API", "level": 70 },
+      { "name": "Optimización de base de datos", "level": 90 },
+      { "name": "Revisión de calidad de código", "level": 95 },
+      { "name": "Planificación Ágil", "level": 90 },
+      { "name": "Automatización de procesos", "level": 70 },
+      { "name": "Optimización de rendimiento", "level": 70 }
+    ],
+    "soft": [
+      { "name": "Liderazgo de equipos", "level": 95 },
+      { "name": "Resolución de problemas", "level": 95 },
+      { "name": "Comunicación efectiva", "level": 92 },
+      { "name": "Colaborativa", "level": 92 },
+      { "name": "Trabajo en equipo multicultural", "level": 90 }
+    ]
+  },
+  "projects": [
+    {
+      "id": "project-1",
+      "title": "Despliegue internacional Everest Insurance",
+      "summary": "Coordinación del despliegue del sistema de seguros en Chile, México y Colombia.",
+      "description": "Lideré el despliegue internacional del sistema de gestión de seguros para Everest Insurance, coordinando equipos en Chile, México y Colombia. El proyecto incluyó la parametrización regional del sistema, integración con APIs locales de cada país, migración de datos históricos y capacitación a equipos locales. Como resultado, se logró reducir el tiempo de onboarding de nuevos mercados en un 40% y estandarizar los procesos operativos entre las tres filiales.",
+      "technologies": [".NET", "PL/SQL", "Oracle DB", "Azure DevOps"],
+      "liveUrl": "",
+      "repoUrl": "",
+      "hasLink": false,
+      "year": "2023",
+      "role": "Technical Project Manager"
+    },
+    {
+      "id": "project-2",
+      "title": "Automatización de procesos de siniestros",
+      "summary": "Sistema de automatización para el procesamiento de siniestros de seguros.",
+      "description": "Diseñé e implementé un sistema de automatización para el procesamiento de siniestros que redujo el tiempo de respuesta de 5 días a menos de 24 horas. El sistema integra validaciones automáticas, flujos de aprobación configurables y notificaciones en tiempo real. Se utilizaron herramientas de BPM integradas con el sistema core de seguros, mejorando la satisfacción del cliente y reduciendo costos operativos en un 30%.",
+      "technologies": [".NET", "C#", "SQL Server", "JavaScript"],
+      "liveUrl": "",
+      "repoUrl": "",
+      "hasLink": false,
+      "year": "2022",
+      "role": "Senior Backend Developer & Tech Lead"
+    },
+    {
+      "id": "project-3",
+      "title": "Portafolio personal",
+      "summary": "Sitio web one-page para presentar perfil profesional, proyectos y experiencia.",
+      "description": "Desarrollo de portafolio personal con Astro 6 (SSG), Tailwind CSS 4 y TypeScript. El sitio es completamente data-driven: todo el contenido se gestiona desde archivos JSON sin tocar código de componentes. Incluye soporte bilingüe (ES/EN) con i18n nativo de Astro, sistema de temas dark/light sin FOUC, animaciones de scroll con IntersectionObserver y despliegue automático en Vercel.",
+      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Vercel"],
+      "liveUrl": "https://dayanestefania.dev",
+      "repoUrl": "https://github.com/Dayanic/portafolio",
+      "hasLink": true,
+      "year": "2026",
+      "role": "Desarrolladora Full Stack"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "company": "Insurance Technology S.A.",
+      "role": "Consultor Senior de Proyectos de TI",
+      "startDate": "01/2024",
+      "endDate": null,
+      "current": true,
+      "description": [
+        "Lideré la planificación, coordinación y ejecución de un proyecto internacional de implementación de software para Everest, asegurando una gestión eficiente del alcance, los requisitos, los recursos y la comunicación con los stakeholders.",
+        "Dirigí un equipo multicultural de 11 profesionales, fortaleciendo la colaboración y mejorando la productividad del equipo.",
+        "Implementé la automatización de los procesos de emisión de pólizas mediante cargas masivas de datos, optimizando la eficiencia operativa y reduciendo los tiempos de procesamiento.",
+        "Aumenté la capacidad operativa del equipo en un 50 % a través de iniciativas de mejora continua y optimización de recursos.",
+        "Lideré exitosamente los despliegues en México y Colombia dentro de los plazos comprometidos, cumpliendo los requisitos del negocio y consolidando la confianza del cliente para la ejecución del proyecto en Perú en 2026."
+      ]
+    },
+    {
+      "id": "exp-2",
+      "company": "Insurance Technology S.A.",
+      "role": "Lider Técnico / Ingeniero de Software",
+      "startDate": "01/2018",
+      "endDate": "12/2023",
+      "current": false,
+      "description": [
+        "Lideré el diseño, desarrollo y optimización de soluciones de software, impulsando la automatización de procesos, mejoras de seguridad y la ejecución de iniciativas tecnológicas estratégicas.",
+        "Dirigí el desarrollo de soluciones personalizadas y de procesamiento masivo para el sector asegurador, utilizando Oracle PL/SQL para optimizar procesos de negocio críticos.",
+        "Gestioné la evolución del sistema VisualTime, mejorando su rendimiento, estabilidad y experiencia de usuario.",
+        "Implementé una metodología SCRUM adoptada a nivel organizacional, incrementando la eficiencia y previsibilidad en la entrega de proyectos.",
+        "Estandaricé prácticas de desarrollo y control de versiones mediante Azure DevOps y GitHub, fortaleciendo la calidad y gobernanza tecnológica.",
+        "Lideré iniciativas de ciberseguridad y modernización tecnológica, incluyendo actualizaciones de servidores y plataformas de bases de datos.",
+        "Coordiné la planificación y ejecución de sprints ágiles, mejoras evolutivas y actualizaciones de sistemas críticos para el negocio.",
+        "Mantuve una tasa de aceptación del 100 % en las entregas por parte de QA y clientes, actuando como referente técnico principal y facilitador entre las áreas de negocio y desarrollo.",
+        "Mentoricé equipos multidisciplinarios y proporcioné soporte técnico estratégico, promoviendo la colaboración, estabilidad operativa y el desarrollo de capacidades internas."
+      ]
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-1",
+      "name": "Canaway Technology Implementation",
+      "issuer": "Canaway",
+      "year": "2025",
+      "credentialUrl": "https://canawaymoodle.com/pluginfile.php/1/tool_certificate/issues/1748402136/1634997845DC.pdf"
+    },
+    {
+      "id": "cert-2",
+      "name": "NPM Package Management",
+      "issuer": "Platzi",
+      "year": "2023",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/3578-npm/diploma/detalle/"
+    },
+    {
+      "id": "cert-3",
+      "name": "JavaScript Clean Code",
+      "issuer": "Platzi",
+      "year": "2023",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/6240-javascript-clean-code/diploma/detalle/"
+    },
+    {
+      "id": "cert-4",
+      "name": "Git and GitHub",
+      "issuer": "Platzi",
+      "year": "2022",
+      "credentialUrl": "https://platzi.com/p/Dayanic/curso/1557-git-github/diploma/detalle/"
+    }
+  ],
+  "contact": {
+    "email": "dayanne.cguzman@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/dayanecoronado",
+    "github": "https://github.com/Dayanic",
+    "showGithub": false
+  }
+}

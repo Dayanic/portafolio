@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Technologies from '../components/Technologies.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import ProjectModal from '../components/ProjectModal.astro';
+import Experience from '../components/Experience.astro';
+import Certificates from '../components/Certificates.astro';
+import Contact from '../components/Contact.astro';
+import type { IPortfolioData } from '../types/portfolio';
+
+import esRaw from '../data/es.json';
+import enRaw from '../data/en.json';
+
+const es = esRaw as IPortfolioData;
+const en = enRaw as IPortfolioData;
+---
+
+<BaseLayout esMeta={es.meta} enMeta={en.meta}>
+  <Header />
+
+  <main>
+    <!--
+      Cada sección tiene un id único aquí (para que los anchor links del nav funcionen).
+      Dentro, dos bloques data-lang: CSS muestra solo el activo sin recarga de página.
+    -->
+
+    <div id="hero">
+      <div data-lang="es"><Hero hero={es.hero} lang="es" /></div>
+      <div data-lang="en"><Hero hero={en.hero} lang="en" /></div>
+    </div>
+
+    <div id="about">
+      <div data-lang="es"><About about={es.about} lang="es" /></div>
+      <div data-lang="en"><About about={en.about} lang="en" /></div>
+    </div>
+
+    <div id="technologies">
+      <div data-lang="es"><Technologies technologies={es.technologies} lang="es" /></div>
+      <div data-lang="en"><Technologies technologies={en.technologies} lang="en" /></div>
+    </div>
+
+    <div id="skills">
+      <div data-lang="es"><Skills skills={es.skills} lang="es" /></div>
+      <div data-lang="en"><Skills skills={en.skills} lang="en" /></div>
+    </div>
+
+    <div id="projects">
+      <div data-lang="es"><Projects projects={es.projects} lang="es" /></div>
+      <div data-lang="en"><Projects projects={en.projects} lang="en" /></div>
+    </div>
+
+    <div id="experience">
+      <div data-lang="es"><Experience experience={es.experience} lang="es" /></div>
+      <div data-lang="en"><Experience experience={en.experience} lang="en" /></div>
+    </div>
+
+    <div id="certificates">
+      <div data-lang="es"><Certificates certificates={es.certificates} lang="es" /></div>
+      <div data-lang="en"><Certificates certificates={en.certificates} lang="en" /></div>
+    </div>
+
+    <div id="contact">
+      <div data-lang="es"><Contact contact={es.contact} lang="es" /></div>
+      <div data-lang="en"><Contact contact={en.contact} lang="en" /></div>
+    </div>
+  </main>
+
+  <!-- Modal único: detecta idioma activo en runtime -->
+  <ProjectModal />
+</BaseLayout>
