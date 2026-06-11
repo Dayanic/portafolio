@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Dayane Coronado Guzmán — Computer Engineering",
-    "description": "Professional portfolio of Dayane Coronado Guzmán, Technical Project Manager and Senior Backend Developer with over 7 years of experience.",
+    "description": "Professional portfolio of Dayane Coronado Guzmán, Technical Project Manager and Senior Backend Developer with over 13 years of experience.",
     "url": "https://dayanestefania.dev",
     "ogImage": "/og-image.jpg"
   },
@@ -15,42 +15,46 @@
     ],
     "location": "Santiago, Chile",
     "avatar": "/avatar.jpg",
-    "cv": "/cv-en.pdf",
-    "cvAvailable": true
+    "yearsExperience": 13,
+    "availableForWork": true
   },
   "about": {
     "summary": "Experienced Software Development professional with a strong background in designing, developing, and optimizing web-based solutions. Proven ability to lead cross-functional teams, implement process improvements, and deliver high-quality projects on time. Adept at combining technical expertise with leadership to drive efficiency and innovation."
   },
   "technologies": [
-    { "name": "C# / VB / .NET", "level": "expert", "category": "backend" },
-    { "name": "JavaScript", "level": "intermediate", "category": "frontend" },
-    { "name": "Oracle PL/SQL", "level": "expert", "category": "database" },
-    { "name": "SQL Server", "level": "intermediate", "category": "database" },
-    { "name": "Git / GitHub", "level": "intermediate", "category": "devops" },
-    { "name": "SVN (Subversion)", "level": "expert", "category": "devops" },
-    { "name": "Team Foundation (TFVC)", "level": "expert", "category": "devops" },
-    { "name": "Azure DevOps CI/CD pipelines", "level": "intermediate", "category": "devops" },
-    { "name": "JIRA", "level": "intermediate", "category": "devops" },
-    { "name": "NPM", "level": "intermediate", "category": "other" },
-    { "name": "HTML", "level": "intermediate", "category": "frontend" }
+    { "name": "HTML", "category": "frontend" },
+    { "name": "JavaScript", "category": "frontend" },
+    { "name": "C#", "category": "backend" },
+    { "name": "VB.NET", "category": "backend" },
+    { "name": "Oracle PL/SQL", "category": "database" },
+    { "name": "SQL Server", "category": "database" },
+    { "name": "PostgreSQL", "category": "database" },
+    { "name": "NPM", "category": "other" },
+    { "name": "API Rest", "category": "other" },
+    { "name": "JIRA", "category": "devops" },
+    { "name": "Service Now", "category": "devops" },
+    { "name": "Git / GitHub", "category": "devops" },
+    { "name": "Azure DevOps CI/CD pipelines", "category": "devops" },
+    { "name": "Team Foundation Version Control (TFVC)", "category": "devops" },
+    { "name": "SVN (Subversion)", "category": "devops" }
   ],
   "skills": {
     "technical": [
-      { "name": "Software Architecture", "level": 90 },
-      { "name": "Web development", "level": 90 },
-      { "name": "API integration", "level": 70 },
-      { "name": "Database optimization", "level": 90 },
-      { "name": "Code quality review", "level": 95 },
-      { "name": "Agile planning", "level": 90 },
-      { "name": "Process automation", "level": 70 },
-      { "name": "Performance tuning", "level": 70 }
+      { "name": "Software Architecture",  "icon": "mdi:sitemap" },
+      { "name": "Web development",        "icon": "mdi:web" },
+      { "name": "API integration",        "icon": "mdi:api" },
+      { "name": "Database optimization",  "icon": "mdi:database" },
+      { "name": "Code quality review",    "icon": "mdi:code-tags-check" },
+      { "name": "Agile planning",         "icon": "mdi:lightning-bolt" },
+      { "name": "Process automation",     "icon": "mdi:robot" },
+      { "name": "Performance tuning",     "icon": "mdi:speedometer" }
     ],
     "soft": [
-      { "name": "Leadership", "level": 95 },
-      { "name": "Problem Solving", "level": 95 },
-      { "name": "Communication", "level": 92 },
-      { "name": "Collaboration", "level": 92 },
-      { "name": "Multicultural Teamwork", "level": 90 }
+      { "name": "Leadership",             "icon": "mdi:account-group" },
+      { "name": "Problem Solving",        "icon": "mdi:puzzle" },
+      { "name": "Communication",          "icon": "mdi:message-text" },
+      { "name": "Collaboration",          "icon": "mdi:handshake" },
+      { "name": "Multicultural Teamwork", "icon": "mdi:earth" }
     ]
   },
   "projects": [

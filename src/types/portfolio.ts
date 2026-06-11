@@ -11,8 +11,8 @@ export interface IHero {
   roles: string[];
   location: string;
   avatar: string;
-  cv: string;
-  cvAvailable: boolean;
+  yearsExperience: number;
+  availableForWork: boolean;
 }
 
 export interface IAbout {
@@ -21,13 +21,12 @@ export interface IAbout {
 
 export interface ITechnology {
   name: string;
-  level: 'experto' | 'intermedio' | 'aprendiendo' | 'expert' | 'intermediate' | 'learning';
   category: 'backend' | 'frontend' | 'devops' | 'cloud' | 'database' | 'other';
 }
 
 export interface ISkillItem {
   name: string;
-  level: number;
+  icon: string;
 }
 
 export interface ISkills {

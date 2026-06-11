@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Dayane Coronado Guzmán — Ingeniera en Informática",
-    "description": "Portafolio profesional de Dayane Coronado Guzmán, Technical Project Manager y Senior Backend Developer con más de 7 años de experiencia.",
+    "description": "Portafolio profesional de Dayane Coronado Guzmán, Technical Project Manager y Senior Backend Developer con más de 13 años de experiencia.",
     "url": "https://dayanestefania.dev",
     "ogImage": "/og-image.jpg"
   },
@@ -15,42 +15,46 @@
     ],
     "location": "Santiago, Chile",
     "avatar": "/avatar.jpg",
-    "cv": "/cv-es.pdf",
-    "cvAvailable": false
+    "yearsExperience": 13,
+    "availableForWork": true
   },
   "about": {
     "summary": "Profesional experimentado en Desarrollo de Software con una sólida trayectoria en el diseño, desarrollo y optimización de soluciones web. Capacidad comprobada para liderar equipos multifuncionales, implementar mejoras de procesos y entregar proyectos de alta calidad a tiempo. Hábil para combinar experiencia técnica con habilidades de liderazgo para impulsar la eficiencia y la innovación."
   },
   "technologies": [
-    { "name": "C# / VB / .NET", "level": "expert", "category": "backend" },
-    { "name": "JavaScript", "level": "intermediate", "category": "frontend" },
-    { "name": "Oracle PL/SQL", "level": "expert", "category": "database" },
-    { "name": "SQL Server", "level": "intermediate", "category": "database" },
-    { "name": "Git / GitHub", "level": "intermediate", "category": "devops" },
-    { "name": "SVN (Subversion)", "level": "expert", "category": "devops" },
-    { "name": "Team Foundation (TFVC)", "level": "expert", "category": "devops" },
-    { "name": "Azure DevOps CI/CD pipelines", "level": "intermediate", "category": "devops" },
-    { "name": "JIRA", "level": "intermediate", "category": "devops" },
-    { "name": "NPM", "level": "intermediate", "category": "other" },
-    { "name": "HTML", "level": "intermediate", "category": "frontend" }
+    { "name": "HTML", "category": "frontend" },
+    { "name": "JavaScript", "category": "frontend" },
+    { "name": "C#", "category": "backend" },
+    { "name": "VB.NET", "category": "backend" },
+    { "name": "Oracle PL/SQL", "category": "database" },
+    { "name": "SQL Server", "category": "database" },
+    { "name": "PostgreSQL", "category": "database" },
+    { "name": "NPM", "category": "other" },
+    { "name": "API Rest", "category": "other" },
+    { "name": "JIRA", "category": "devops" },
+    { "name": "Service Now", "category": "devops" },
+    { "name": "Git / GitHub", "category": "devops" },
+    { "name": "Azure DevOps CI/CD pipelines", "category": "devops" },
+    { "name": "Team Foundation Version Control (TFVC)", "category": "devops" },
+    { "name": "SVN (Subversion)", "category": "devops" }
   ],
   "skills": {
     "technical": [
-      { "name": "Arquitectura de software", "level": 90 },
-      { "name": "Desarrollo Web", "level": 90 },
-      { "name": "Integración de API", "level": 70 },
-      { "name": "Optimización de base de datos", "level": 90 },
-      { "name": "Revisión de calidad de código", "level": 95 },
-      { "name": "Planificación Ágil", "level": 90 },
-      { "name": "Automatización de procesos", "level": 70 },
-      { "name": "Optimización de rendimiento", "level": 70 }
+      { "name": "Arquitectura de software",      "icon": "mdi:sitemap" },
+      { "name": "Desarrollo Web",                "icon": "mdi:web" },
+      { "name": "Integración de API",            "icon": "mdi:api" },
+      { "name": "Optimización de base de datos", "icon": "mdi:database" },
+      { "name": "Revisión de calidad de código", "icon": "mdi:code-tags-check" },
+      { "name": "Planificación Ágil",            "icon": "mdi:lightning-bolt" },
+      { "name": "Automatización de procesos",    "icon": "mdi:robot" },
+      { "name": "Optimización de rendimiento",   "icon": "mdi:speedometer" }
     ],
     "soft": [
-      { "name": "Liderazgo de equipos", "level": 95 },
-      { "name": "Resolución de problemas", "level": 95 },
-      { "name": "Comunicación efectiva", "level": 92 },
-      { "name": "Colaborativa", "level": 92 },
-      { "name": "Trabajo en equipo multicultural", "level": 90 }
+      { "name": "Liderazgo de equipos",          "icon": "mdi:account-group" },
+      { "name": "Resolución de problemas",       "icon": "mdi:puzzle" },
+      { "name": "Comunicación efectiva",         "icon": "mdi:message-text" },
+      { "name": "Colaborativa",                  "icon": "mdi:handshake" },
+      { "name": "Trabajo en equipo multicultural", "icon": "mdi:earth" }
     ]
   },
   "projects": [
