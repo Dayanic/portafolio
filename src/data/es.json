@@ -15,8 +15,7 @@
     ],
     "location": "Santiago, Chile",
     "avatar": "/avatar.jpg",
-    "yearsExperience": 13,
-    "availableForWork": true
+    "yearsExperience": 13
   },
   "about": {
     "summary": "Profesional experimentado en Desarrollo de Software con una sólida trayectoria en el diseño, desarrollo y optimización de soluciones web. Capacidad comprobada para liderar equipos multifuncionales, implementar mejoras de procesos y entregar proyectos de alta calidad a tiempo. Hábil para combinar experiencia técnica con habilidades de liderazgo para impulsar la eficiencia y la innovación."
@@ -30,7 +29,7 @@
     { "name": "SQL Server", "category": "database" },
     { "name": "PostgreSQL", "category": "database" },
     { "name": "NPM", "category": "other" },
-    { "name": "API Rest", "category": "other" },
+    { "name": "API REST", "category": "other" },
     { "name": "JIRA", "category": "devops" },
     { "name": "Service Now", "category": "devops" },
     { "name": "Git / GitHub", "category": "devops" },
@@ -53,7 +52,7 @@
       { "name": "Liderazgo de equipos",          "icon": "mdi:account-group" },
       { "name": "Resolución de problemas",       "icon": "mdi:puzzle" },
       { "name": "Comunicación efectiva",         "icon": "mdi:message-text" },
-      { "name": "Colaborativa",                  "icon": "mdi:handshake" },
+      { "name": "Colaboración",                  "icon": "mdi:handshake" },
       { "name": "Trabajo en equipo multicultural", "icon": "mdi:earth" }
     ]
   },
@@ -114,7 +113,7 @@
     {
       "id": "exp-2",
       "company": "Insurance Technology S.A.",
-      "role": "Lider Técnico / Ingeniero de Software",
+      "role": "Líder Técnico / Ingeniero de Software",
       "startDate": "01/2018",
       "endDate": "12/2023",
       "current": false,

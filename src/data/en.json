@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Dayane Coronado Guzmán — Computer Engineering",
+    "title": "Dayane Coronado Guzmán — Computer Engineer",
     "description": "Professional portfolio of Dayane Coronado Guzmán, Technical Project Manager and Senior Backend Developer with over 13 years of experience.",
     "url": "https://dayanestefania.dev",
     "ogImage": "/og-image.jpg"
@@ -15,8 +15,7 @@
     ],
     "location": "Santiago, Chile",
     "avatar": "/avatar.jpg",
-    "yearsExperience": 13,
-    "availableForWork": true
+    "yearsExperience": 13
   },
   "about": {
     "summary": "Experienced Software Development professional with a strong background in designing, developing, and optimizing web-based solutions. Proven ability to lead cross-functional teams, implement process improvements, and deliver high-quality projects on time. Adept at combining technical expertise with leadership to drive efficiency and innovation."
@@ -30,7 +29,7 @@
     { "name": "SQL Server", "category": "database" },
     { "name": "PostgreSQL", "category": "database" },
     { "name": "NPM", "category": "other" },
-    { "name": "API Rest", "category": "other" },
+    { "name": "API REST", "category": "other" },
     { "name": "JIRA", "category": "devops" },
     { "name": "Service Now", "category": "devops" },
     { "name": "Git / GitHub", "category": "devops" },

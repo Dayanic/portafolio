@@ -12,7 +12,6 @@ export interface IHero {
   location: string;
   avatar: string;
   yearsExperience: number;
-  availableForWork: boolean;
 }
 
 export interface IAbout {
