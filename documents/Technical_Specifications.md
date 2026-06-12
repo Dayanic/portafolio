@@ -1,6 +1,6 @@
 # Especificaciones Técnicas — Portafolio Personal
 **Dayane Coronado Guzmán**
-**Versión:** 2.0.0
+**Versión:** 2.1.0
 **Fecha:** Junio 2026
 **Estado:** Implementado y en producción
 
@@ -32,19 +32,19 @@
 ## 1. Resumen del proyecto
 
 ### Descripción
-Portafolio personal profesional de tipo *one-page* para Dayane Coronado Guzmán, Ingeniera en Informática. El sitio presenta información profesional, tecnologías con iconos representativos, proyectos, experiencia laboral, certificaciones y datos de contacto.
+Portafolio personal profesional de tipo *one-page* para Dayane Coronado Guzmán, Ingeniera en Informática. El sitio presenta información profesional, tecnologías con iconos representativos, proyectos, experiencia laboral y certificaciones.
 
 ### Objetivos
 - Presentar el perfil profesional de forma clara, moderna y accesible.
-- Ser completamente mantenible actualizando únicamente los archivos `es.json` / `en.json`, sin tocar código fuente.
+- Ser completamente mantenible actualizando únicamente `src/data/data.json`, sin tocar código fuente.
 - Ofrecer soporte bilingüe (español / inglés) desde el inicio.
 - Garantizar rendimiento óptimo (Lighthouse ≥ 95 en todas las métricas).
 - Ser desplegable de forma continua desde GitHub hacia Vercel.
 
 ### URL del proyecto
 - **Repositorio:** `https://github.com/Dayanic/portafolio`
-- **Dominio principal:** pendiente de definición entre `dayanestefania.dev` y `dayanestefania.com`
-- **Dominio secundario:** el no elegido como principal actuará como redirección (configuración en Vercel, no en código)
+- **Dominio principal:** `https://dayanestefania.com`
+- **Dominio secundario:** `dayanestefania.dev` — redirige con 301 permanente al dominio principal (regla en `vercel.json`)
 
 ---
 
@@ -80,25 +80,23 @@ Portafolio personal profesional de tipo *one-page* para Dayane Coronado Guzmán,
 
 ### Flujo de datos
 ```
-src/data/
-├── es.json   ← contenido en español
-└── en.json   ← contenido en inglés
+src/data/data.json   ← archivo único bilingüe
         ↓
-Astro (build time)
+src/i18n/resolve.ts  ← resolveData(raw, lang) convierte B<T> → T
         ↓
-HTML estático generado (con SVG de iconos incrustados)
+Astro (build time)   ← genera dos conjuntos de props: es + en
+        ↓
+HTML estático con data-lang="es" / data-lang="en"
+        ↓
+CSS oculta la sección inactiva según clase lang-en en <html>
         ↓
 Vercel CDN
         ↓
 Usuario final
 ```
 
-### Flujo de i18n
-```
-/          → redirige automáticamente a /es o /en según el navegador
-/es        → portafolio en español
-/en        → portafolio en inglés
-```
+### Estrategia bilingüe (SSG sin rutas duplicadas)
+El sitio genera **una sola página HTML** que contiene el contenido en ambos idiomas. Cada sección se envuelve en `<div data-lang="es">` y `<div data-lang="en">`. El CSS global oculta el bloque inactivo (`display: none !important`) según la clase `lang-en` en `<html>`. El cambio de idioma no recarga la página — solo alterna la clase y actualiza `localStorage`.
 
 ---
 
@@ -115,22 +113,22 @@ portafolio/
 │
 ├── src/
 │   ├── data/
-│   │   ├── es.json              ← datos del portafolio en español
-│   │   └── en.json              ← datos del portafolio en inglés
+│   │   └── data.json            ← archivo único con todo el contenido bilingüe
 │   │
 │   ├── types/
-│   │   └── portfolio.ts         ← interfaces TypeScript para los datos JSON
+│   │   └── portfolio.ts         ← interfaces TypeScript: IRaw* (bilingüe) + I* (monolingüe)
 │   │
 │   ├── i18n/
 │   │   ├── ui.ts                ← traducciones de textos fijos de la UI
-│   │   └── utils.ts             ← helper para obtener el idioma activo
+│   │   ├── utils.ts             ← helper useTranslations(lang)
+│   │   └── resolve.ts           ← resolveData(raw, lang): IRawPortfolioData → IPortfolioData
 │   │
 │   ├── layouts/
 │   │   └── BaseLayout.astro     ← layout base: HTML, head, meta, scripts globales
 │   │
 │   ├── components/
 │   │   ├── Header.astro         ← barra de navegación sticky con controles de tema e idioma
-│   │   ├── Hero.astro           ← sección principal con foto, nombre, rol rotativo y badges
+│   │   ├── Hero.astro           ← foto, nombre, roles rotativos, badges (experiencia + LinkedIn)
 │   │   ├── About.astro          ← sección "Sobre mí"
 │   │   ├── Technologies.astro   ← grid de tecnologías con icono representativo por tecnología
 │   │   ├── Skills.astro         ← habilidades en grid 2 columnas con chips + icono
@@ -138,16 +136,11 @@ portafolio/
 │   │   ├── ProjectModal.astro   ← modal reutilizable de detalle de proyecto
 │   │   ├── Experience.astro     ← timeline vertical de experiencia laboral
 │   │   ├── Certificates.astro   ← grid de certificaciones
-│   │   ├── Contact.astro        ← sección de datos de contacto
 │   │   ├── ThemeToggle.astro    ← botón de cambio dark/light
 │   │   └── LangToggle.astro     ← botón de cambio ES/EN
 │   │
 │   └── pages/
-│       ├── index.astro          ← redirección automática a /es o /en
-│       ├── es/
-│       │   └── index.astro      ← portafolio en español
-│       └── en/
-│           └── index.astro      ← portafolio en inglés
+│       └── index.astro          ← página única; renderiza todo el contenido con data-lang
 │
 ├── documents/
 │   └── Technical_Specifications.md
@@ -167,9 +160,19 @@ portafolio/
 
 ## 5. Estructura del archivo de datos JSON
 
-Cada idioma tiene su propio archivo JSON (`src/data/es.json` y `src/data/en.json`) con la misma estructura. A continuación se define la estructura completa con la información real actual.
+El portafolio utiliza **un único archivo bilingüe** (`src/data/data.json`). Los campos que varían según idioma se definen con la estructura `{ "es": "...", "en": "..." }`. Los campos compartidos (nombres propios, fechas, URLs) se definen una sola vez.
+
+### Tipo auxiliar B\<T\>
+
+```typescript
+export type B<T> = { es: T; en: T };
+```
 
 ### Interfaces TypeScript (`src/types/portfolio.ts`)
+
+Las interfaces se dividen en dos grupos:
+
+**Interfaces resueltas** (`I*`) — usadas por los componentes. Todos los campos son monolingües.
 
 ```typescript
 export interface IMeta {
@@ -182,11 +185,11 @@ export interface IMeta {
 export interface IHero {
   name: string;
   title: string;
-  roles: string[];          // roles que rotan en el Hero con animación
+  roles: string[];
+  linkedin: string;         // URL al perfil de LinkedIn
   location: string;
   avatar: string;
-  yearsExperience: number;  // se muestra en el badge "X+ años de experiencia"
-  availableForWork: boolean; // controla visibilidad del badge verde de disponibilidad
+  yearsExperience: number;
 }
 
 export interface IAbout {
@@ -196,12 +199,11 @@ export interface IAbout {
 export interface ITechnology {
   name: string;
   category: 'backend' | 'frontend' | 'devops' | 'cloud' | 'database' | 'other';
-  // Sin campo "level" — la representación visual es el icono de la tecnología
 }
 
 export interface ISkillItem {
   name: string;
-  icon: string; // nombre de icono Iconify, ej: "mdi:sitemap", "mdi:database"
+  icon: string;             // nombre de icono Iconify, ej: "mdi:sitemap"
 }
 
 export interface ISkills {
@@ -212,12 +214,12 @@ export interface ISkills {
 export interface IProject {
   id: string;
   title: string;
-  summary: string;       // texto corto para la tarjeta
-  description: string;   // texto largo para el modal
+  summary: string;          // texto corto para la tarjeta
+  description: string;      // texto largo para el modal
   technologies: string[];
   liveUrl: string;
   repoUrl: string;
-  hasLink: boolean;      // controla si se muestran los botones de link en el modal
+  hasLink: boolean;
   year: string;
   role: string;
 }
@@ -226,10 +228,10 @@ export interface IExperience {
   id: string;
   company: string;
   role: string;
-  startDate: string;     // formato "MM/AAAA"
-  endDate: string | null; // null si current: true
+  startDate: string;        // formato "MM/AAAA"
+  endDate: string | null;
   current: boolean;
-  description: string[]; // array de bullets, uno por logro/responsabilidad
+  description: string[];    // array de bullets
 }
 
 export interface ICertificate {
@@ -240,79 +242,111 @@ export interface ICertificate {
   credentialUrl: string;
 }
 
-export interface IContact {
-  email: string;
-  linkedin: string;
-  github: string;
-  showGithub: boolean; // controla visibilidad del link de GitHub en la sección de contacto
+export interface ISocial {
+  github: string;           // reservado para uso futuro
+}
+
+export interface IPortfolioData {
+  meta: IMeta;
+  hero: IHero;
+  about: IAbout;
+  technologies: ITechnology[];
+  skills: ISkills;
+  projects: IProject[];
+  experience: IExperience[];
+  certificates: ICertificate[];
+  social: ISocial;
 }
 ```
 
-### Estructura del JSON (es.json / en.json)
+**Interfaces raw** (`IRaw*`) — representan la estructura de `data.json`. Solo se usan en `resolve.ts` e `index.astro`.
+
+```typescript
+export interface IRawHero {
+  name: string;
+  title: B<string>;
+  roles: B<string[]>;
+  linkedin: string;
+  location: string;
+  avatar: string;
+  yearsExperience: number;
+}
+
+export interface IRawPortfolioData {
+  meta: IRawMeta;
+  hero: IRawHero;
+  about: IRawAbout;
+  technologies: ITechnology[];
+  skills: IRawSkills;
+  projects: IRawProject[];
+  experience: IRawExperience[];
+  certificates: ICertificate[];
+  social: ISocial;
+}
+```
+
+### Estructura de `data.json`
 
 ```json
 {
   "meta": {
-    "title": "...",
-    "description": "...",
-    "url": "https://dayanestefania.dev",
+    "title":       { "es": "...", "en": "..." },
+    "description": { "es": "...", "en": "..." },
+    "url": "https://dayanestefania.com",
     "ogImage": "/og-image.jpg"
   },
   "hero": {
     "name": "Dayane Coronado Guzmán",
-    "title": "Ingeniera en Informática",
-    "roles": ["Rol 1", "Rol 2", "Rol 3"],
+    "title": { "es": "Ingeniera en Informática", "en": "Computer Engineer" },
+    "roles": {
+      "es": ["Rol 1", "Rol 2", "Rol 3"],
+      "en": ["Role 1", "Role 2", "Role 3"]
+    },
+    "linkedin": "https://www.linkedin.com/in/dayanecoronado",
     "location": "Santiago, Chile",
     "avatar": "/avatar.jpg",
-    "yearsExperience": 13,
-    "availableForWork": true
+    "yearsExperience": 13
   },
   "about": {
-    "summary": "Texto de presentación..."
+    "summary": { "es": "...", "en": "..." }
   },
   "technologies": [
-    { "name": "HTML",       "category": "frontend" },
-    { "name": "JavaScript", "category": "frontend" },
-    { "name": "C#",         "category": "backend"  }
+    { "name": "HTML", "category": "frontend" }
   ],
   "skills": {
     "technical": [
-      { "name": "Arquitectura de software", "icon": "mdi:sitemap"    },
-      { "name": "Desarrollo Web",           "icon": "mdi:web"        },
-      { "name": "Integración de API",       "icon": "mdi:api"        },
-      { "name": "Optimización de BD",       "icon": "mdi:database"   }
+      { "icon": "mdi:sitemap", "name": { "es": "Arquitectura de software", "en": "Software Architecture" } }
     ],
     "soft": [
-      { "name": "Liderazgo de equipos", "icon": "mdi:account-group" },
-      { "name": "Resolución de problemas", "icon": "mdi:puzzle"     }
+      { "icon": "mdi:account-group", "name": { "es": "Liderazgo de equipos", "en": "Leadership" } }
     ]
   },
   "projects": [
     {
       "id": "project-1",
-      "title": "Nombre del proyecto",
-      "summary": "Descripción breve para la tarjeta.",
-      "description": "Descripción detallada para el modal.",
-      "technologies": ["Tech 1", "Tech 2"],
+      "technologies": ["Tech 1"],
       "liveUrl": "",
       "repoUrl": "",
       "hasLink": false,
       "year": "2024",
-      "role": "Rol en el proyecto"
+      "title":       { "es": "...", "en": "..." },
+      "summary":     { "es": "...", "en": "..." },
+      "description": { "es": "...", "en": "..." },
+      "role":        { "es": "...", "en": "..." }
     }
   ],
   "experience": [
     {
       "id": "exp-1",
       "company": "Empresa S.A.",
-      "role": "Cargo",
       "startDate": "01/2024",
       "endDate": null,
       "current": true,
-      "description": [
-        "Logro o responsabilidad 1.",
-        "Logro o responsabilidad 2."
-      ]
+      "role":        { "es": "Cargo", "en": "Role" },
+      "description": {
+        "es": ["Logro 1.", "Logro 2."],
+        "en": ["Achievement 1.", "Achievement 2."]
+      }
     }
   ],
   "certificates": [
@@ -324,16 +358,13 @@ export interface IContact {
       "credentialUrl": "https://..."
     }
   ],
-  "contact": {
-    "email": "dayanne.cguzman@gmail.com",
-    "linkedin": "https://www.linkedin.com/in/dayanecoronado",
-    "github": "https://github.com/Dayanic",
-    "showGithub": false
+  "social": {
+    "github": "https://github.com/Dayanic"
   }
 }
 ```
 
-> **Nota:** Los campos booleanos `availableForWork`, `hasLink` y `showGithub` controlan visibilidad de elementos en la UI sin necesidad de modificar código. El campo `current: true` en experiencia oculta `endDate` y muestra la etiqueta "Presente".
+> **Nota:** El campo `social.github` está reservado para uso futuro. Los campos booleanos `hasLink` y `current` controlan visibilidad de elementos en la UI sin necesidad de modificar código.
 
 ---
 
@@ -343,20 +374,21 @@ El portafolio es **one-page** con scroll suave entre secciones. El orden de rend
 
 | # | ID de sección | Componente | Descripción |
 |---|---|---|---|
-| 1 | `#hero` | `Hero.astro` | Foto, nombre, roles rotativos, ubicación, badges de experiencia y disponibilidad |
+| 1 | `#hero` | `Hero.astro` | Foto, nombre, roles rotativos, ubicación, badge de experiencia y botón LinkedIn |
 | 2 | `#about` | `About.astro` | Párrafo de presentación extendida |
 | 3 | `#technologies` | `Technologies.astro` | Grid de tarjetas con icono representativo de cada tecnología |
 | 4 | `#skills` | `Skills.astro` | Habilidades técnicas y soft skills en grid 2 columnas con chips + icono |
 | 5 | `#projects` | `Projects.astro` | Tarjetas de proyectos con modal de detalle al hacer clic |
 | 6 | `#experience` | `Experience.astro` | Timeline vertical de experiencia laboral |
 | 7 | `#certificates` | `Certificates.astro` | Grid de certificaciones con link a credencial si aplica |
-| 8 | `#contact` | `Contact.astro` | Email, LinkedIn y GitHub opcional con íconos |
+
+El pie de página (copyright) se renderiza directamente en `index.astro` tras el cierre de `<main>`, con bloques `data-lang` para cada idioma.
 
 ### Hero
-- Altura mínima `min-h-[60vh]` (reducida tras eliminar los CTA).
+- Altura mínima `min-h-[60vh]`.
 - Roles rotativos con animación fade (intervalo 3 segundos, script cliente mínimo).
-- No incluye botones de CV ni de contacto — la sección Contact al final cumple esa función.
-- Badges: años de experiencia (dato desde JSON) y disponibilidad (booleano desde JSON).
+- Badges en fila: badge de años de experiencia + botón de LinkedIn (mismo estilo de pill, con hover).
+- El botón de LinkedIn abre el perfil en nueva pestaña con `rel="noopener noreferrer"`.
 
 ### Technologies
 - Grid responsivo: 2 cols mobile → 3 cols sm → 4 cols lg → 5 cols xl.
@@ -372,14 +404,9 @@ El portafolio es **one-page** con scroll suave entre secciones. El orden de rend
 
 ### Experience
 - Timeline vertical con línea conectora entre items via `::before` pseudo-element.
-- La línea pasa por el centro de los círculos indicadores (`left: 1.125rem` en mobile, `2.125rem` en sm+).
 - `description` es un array de bullets — cada elemento se renderiza como un `<li>`.
 - Borde visible en dark mode: `dark:border-violet-500/40` en cada tarjeta de trabajo.
 - El item activo (en zona de lectura) se muestra a opacidad completa; los demás se atenúan a 0.45.
-
-### Contact
-- Cards de email, LinkedIn y GitHub (condicional) con borde visible en dark mode: `dark:border-violet-500/40`.
-- El separador del footer también usa `dark:border-violet-500/40` para mantener coherencia.
 
 ### Comportamiento del modal de proyectos
 - Al hacer clic en una tarjeta se abre un modal superpuesto.
@@ -405,7 +432,7 @@ El portafolio es **one-page** con scroll suave entre secciones. El orden de rend
 | Paquete | Prefijo | Uso |
 |---|---|---|
 | `@iconify-json/devicon` | `devicon:` | Iconos de marca a color para tecnologías (HTML, JS, C#, Git…) |
-| `@iconify-json/simple-icons` | `simple-icons:` | Iconos de marca monocromáticos (`currentColor`) — SQL Server, Azure DevOps |
+| `@iconify-json/simple-icons` | `simple-icons:` | Iconos de marca monocromáticos (`currentColor`) — SQL Server, Azure DevOps, JIRA |
 | `@iconify-json/mdi` | `mdi:` | Material Design Icons para skills (sitemap, database, puzzle…) |
 
 ### Uso en componentes
@@ -432,8 +459,8 @@ Los iconos `simple-icons:*` usan `currentColor` y deben recibir explícitamente 
 | SQL Server | `simple-icons:microsoftsqlserver` |
 | PostgreSQL | `devicon:postgresql` |
 | NPM | `devicon:npm-wordmark` |
-| API Rest | `devicon:swagger` |
-| JIRA | `devicon:jira` |
+| REST API | `devicon:swagger` |
+| JIRA | `simple-icons:jira` |
 | Service Now | SVG inline (ver nota abajo) |
 | Git / GitHub | `devicon:git` |
 | Azure DevOps CI/CD pipelines | `simple-icons:azuredevops` |
@@ -441,6 +468,7 @@ Los iconos `simple-icons:*` usan `currentColor` y deben recibir explícitamente 
 | SVN (Subversion) | `devicon:subversion` |
 
 > **ServiceNow:** No existe icono oficial en ningún paquete Iconify gratuito. Se usa un SVG inline que aproxima su marca: círculo verde (#81b5a1) con anillo blanco y punto central blanco.
+> **JIRA:** Se usa `simple-icons:jira` en lugar de `devicon:jira` porque la variante devicon tiene un viewBox de 128×128 con gradientes que causa recorte visual en contenedores pequeños.
 
 ### Mapa de iconos — Skills (`icon` en JSON)
 
@@ -465,24 +493,22 @@ Los iconos `simple-icons:*` usan `currentColor` y deben recibir explícitamente 
 ## 8. Internacionalización (i18n)
 
 ### Estrategia
-Se utiliza el sistema de i18n nativo de Astro 6 con rutas basadas en prefijos de idioma.
+El sitio genera **una sola página HTML** con contenido dual. No hay rutas `/es` ni `/en`. El CSS oculta el bloque inactivo y el JS del cliente alterna la clase `lang-en` en `<html>` al cambiar de idioma.
 
 ### Idiomas soportados
-| Código | Idioma | Ruta |
-|---|---|---|
-| `es` | Español | `/es` |
-| `en` | English | `/en` |
+| Código | Idioma |
+|---|---|
+| `es` | Español (por defecto) |
+| `en` | English |
 
 ### Idioma por defecto
-Español (`es`). La ruta raíz `/` redirige automáticamente según `navigator.language`. Si el idioma del navegador no es español ni inglés, se redirige a `/es`.
+Español (`es`). Al cargar por primera vez se detecta `navigator.language`; si comienza por `en` se activa inglés automáticamente. La preferencia se persiste en `localStorage` bajo la clave `preferred-lang`.
 
 ### Textos de la UI
-Los textos fijos de la interfaz (etiquetas de secciones, botones) se definen en `src/i18n/ui.ts`. Los textos de contenido (proyectos, experiencia, etc.) se leen desde los archivos JSON de datos.
+Los textos fijos de la interfaz (etiquetas de secciones, botones) se definen en `src/i18n/ui.ts`. Los textos de contenido (proyectos, experiencia, etc.) se leen desde `data.json`.
 
-### Cambio de idioma
-- El componente `LangToggle.astro` muestra el idioma opuesto al activo (`ES` / `EN`).
-- Al cambiar de idioma navega a la ruta equivalente (`/es` ↔ `/en`).
-- El idioma preferido se guarda en `localStorage` bajo la clave `preferred-lang`.
+### Módulo `resolve.ts`
+`resolveData(raw: IRawPortfolioData, lang: Lang): IPortfolioData` extrae los campos del idioma solicitado de cada `B<T>` y devuelve un objeto monolingüe listo para pasar a los componentes.
 
 ---
 
@@ -549,13 +575,13 @@ API nativa `IntersectionObserver` (sin librerías externas).
 - `<title>`, `<meta name="description">`, Open Graph (title, description, image, url), `<link rel="canonical">`, `<link rel="alternate" hreflang>`.
 
 ### Sitemap
-Generado automáticamente con `@astrojs/sitemap`. Incluye `/es` y `/en`.
+Generado automáticamente con `@astrojs/sitemap`. Incluye la URL canónica del sitio.
 
 ### robots.txt
 ```
 User-agent: *
 Allow: /
-Sitemap: https://dayanestefania.dev/sitemap-index.xml
+Sitemap: https://dayanestefania.com/sitemap-index.xml
 ```
 
 ---
@@ -584,14 +610,30 @@ CI/CD automático desde GitHub. Cada push a `main` dispara build y despliegue.
 ### `vercel.json`
 ```json
 {
-  "framework": "astro",
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
-  "outputDirectory": "dist"
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "dayanestefania.dev" }],
+      "destination": "https://dayanestefania.com/$1",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options",        "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy",        "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy",     "value": "camera=(), microphone=(), geolocation=()" },
+        { "key": "Content-Security-Policy","value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none';" }
+      ]
+    }
+  ]
 }
 ```
-
-> La redirección de `/` a `/es` la maneja el propio Astro (`src/pages/index.astro`), no Vercel.
 
 ### Variables de entorno en Vercel
 | Variable | Entorno | Descripción |
@@ -617,14 +659,16 @@ PUBLIC_GA_MEASUREMENT_ID=
 |---|---|---|
 | Componentes Astro | PascalCase | `Hero.astro`, `ProjectModal.astro` |
 | Archivos TypeScript | camelCase | `portfolio.ts`, `utils.ts` |
-| Variables y funciones | camelCase | `getLanguageFromUrl()` |
-| Interfaces TypeScript | PascalCase con prefijo `I` | `IProject`, `IExperience` |
+| Variables y funciones | camelCase | `resolveData()`, `useTranslations()` |
+| Interfaces TypeScript | PascalCase con prefijo `I` | `IProject`, `IExperience`, `ISocial` |
+| Interfaces raw bilingüe | PascalCase con prefijo `IRaw` | `IRawHero`, `IRawPortfolioData` |
+| Tipo auxiliar bilingüe | `B<T>` | `B<string>`, `B<string[]>` |
 | Clases CSS (Tailwind) | kebab-case | `animate-on-scroll` |
 | IDs en JSON | kebab-case | `project-1`, `exp-2` |
 
 ### Reglas obligatorias
 - TypeScript en modo estricto — sin `any`.
-- Todo el contenido proviene de los JSON; nunca hardcodear texto en componentes.
+- Todo el contenido proviene de `data.json`; nunca hardcodear texto en componentes.
 - Solo clases Tailwind; CSS personalizado únicamente para animaciones de scroll y glow del avatar.
 - Lógica de datos en el frontmatter de Astro, no en scripts de cliente.
 - JavaScript de cliente al mínimo: theme toggle, lang toggle, modal, roles Hero, IntersectionObserver.
@@ -672,19 +716,23 @@ Esta sección documenta decisiones tomadas durante el desarrollo que no son evid
 | ServiceNow con SVG inline | `simple-icons:now` (wordmark) | El slug `simple-icons:now` renderiza el texto "NOW", no reconocible como ícono de marca |
 | `simple-icons:microsoftsqlserver` para SQL Server | `devicon:microsoftsqlserver` | La variante devicon usa gradientes claros invisibles en fondos oscuros y claros |
 | `devicon:visualstudio` para TFVC | Ningún ícono específico de TFVC | TFVC es una característica de Visual Studio/Azure DevOps; VS es el ícono más representativo |
-| `devicon:swagger` para API Rest | `simple-icons:openapiinitiative` | Swagger es más reconocible visualmente; OpenAPI Initiative no tiene ícono gráfico, solo texto |
+| `devicon:swagger` para REST API | `simple-icons:openapiinitiative` | Swagger es más reconocible visualmente; OpenAPI Initiative no tiene ícono gráfico, solo texto |
+| `simple-icons:jira` para JIRA | `devicon:jira` | El viewBox 128×128 de devicon:jira con gradientes causa recorte visual en contenedores pequeños |
 | Grid 2 columnas fijas en Skills | `flex flex-wrap` | El flex wrap genera filas de ancho irregular según longitud de texto; el grid da alineación uniforme |
-| Hero sin botón CTA de contacto | Botón "Contáctame" en Hero | La sección Contact al final del one-page cumple esa función; el botón era redundante |
-| CV no descargable desde el sitio | Botón de descarga de CV | El CV contiene datos personales; se prefiere acceso controlado vía LinkedIn |
+| JSON bilingüe único (`data.json`) | Dos archivos separados (`es.json` / `en.json`) | Elimina duplicación de datos compartidos (fechas, URLs, nombres); los campos traducibles usan `B<T>` = `{ es, en }` |
+| LinkedIn como badge en Hero | Sección Contact separada | Facilita el acceso al perfil profesional desde el primer vistazo; elimina una sección redundante |
+| Sin sección Contact | Cards de email/LinkedIn al final | El email expuesto en la web es vector de spam; LinkedIn basta como punto de contacto profesional |
+| `social.github` en JSON (no expuesto en UI) | Eliminar GitHub del JSON | El link puede activarse en el futuro cambiando solo el JSON; no requiere modificar componentes |
+| `dayanestefania.com` como dominio principal | `dayanestefania.dev` | `.com` es más universal y memorable para una audiencia profesional general |
+| Redirect 301 de `.dev` → `.com` en `vercel.json` | Redirect en Vercel Dashboard | El redirect en código es versionable y reproducible en cualquier entorno de despliegue |
+| Pie de página en `index.astro` (no en `BaseLayout`) | Footer en `BaseLayout.astro` | El footer necesita bloques `data-lang` para alternar entre idiomas; BaseLayout no tiene acceso a esa lógica |
 | `description` como array en `IExperience` | String único | Permite renderizar logros individuales como bullets independientes sin parsing |
 
 ### Pendientes de configuración
-- [ ] Definir dominio principal: `dayanestefania.dev` o `dayanestefania.com`
 - [ ] Subir `og-image.jpg` a `public/`
-- [ ] Conectar repositorio GitHub a Vercel para CI/CD automático
 - [ ] Configurar Measurement ID de Google Analytics en Vercel
 
 ---
 
-*Documento actualizado en Junio 2026. Versión 2.0.0.*
+*Documento actualizado en Junio 2026. Versión 2.1.0.*
 *Refleja el estado real de la implementación. Cualquier cambio posterior debe actualizarse aquí.*

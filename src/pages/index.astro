@@ -9,14 +9,13 @@ import Projects from '../components/Projects.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import Experience from '../components/Experience.astro';
 import Certificates from '../components/Certificates.astro';
-import Contact from '../components/Contact.astro';
-import type { IPortfolioData } from '../types/portfolio';
+import type { IRawPortfolioData } from '../types/portfolio';
+import { resolveData } from '../i18n/resolve';
+import rawData from '../data/data.json';
 
-import esRaw from '../data/es.json';
-import enRaw from '../data/en.json';
-
-const es = esRaw as IPortfolioData;
-const en = enRaw as IPortfolioData;
+const raw = rawData as unknown as IRawPortfolioData;
+const es = resolveData(raw, 'es');
+const en = resolveData(raw, 'en');
 ---
 
 <BaseLayout esMeta={es.meta} enMeta={en.meta}>
@@ -63,11 +62,12 @@ const en = enRaw as IPortfolioData;
       <div data-lang="en"><Certificates certificates={en.certificates} lang="en" /></div>
     </div>
 
-    <div id="contact">
-      <div data-lang="es"><Contact contact={es.contact} lang="es" /></div>
-      <div data-lang="en"><Contact contact={en.contact} lang="en" /></div>
-    </div>
   </main>
+
+  <footer class="border-t border-slate-200 dark:border-violet-500/40 py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+    <div data-lang="es">© {new Date().getFullYear()} Todos los derechos reservados.</div>
+    <div data-lang="en">© {new Date().getFullYear()} All rights reserved.</div>
+  </footer>
 
   <!-- Modal único: detecta idioma activo en runtime -->
   <ProjectModal />

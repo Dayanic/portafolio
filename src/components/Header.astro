@@ -6,7 +6,7 @@ import { ui } from '../i18n/ui';
 const esT = ui['es'];
 const enT = ui['en'];
 
-const sectionIds = ['about', 'technologies', 'skills', 'projects', 'experience', 'certificates', 'contact'] as const;
+const sectionIds = ['about', 'technologies', 'skills', 'projects', 'experience', 'certificates'] as const;
 const esNavLinks = sectionIds.map((id) => ({ href: `#${id}`, label: esT[`nav.${id}` as keyof typeof esT] as string }));
 const enNavLinks = sectionIds.map((id) => ({ href: `#${id}`, label: enT[`nav.${id}` as keyof typeof enT] as string }));
 ---
