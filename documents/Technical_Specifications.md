@@ -107,7 +107,7 @@ portafolio/
 ├── public/
 │   ├── favicon.ico
 │   ├── favicon.svg
-│   ├── avatar.jpg               ← foto profesional
+│   ├── avatar.webp               ← foto profesional
 │   ├── robots.txt
 │   └── og-image.jpg             ← imagen para Open Graph / redes sociales (pendiente)
 │
@@ -304,7 +304,7 @@ export interface IRawPortfolioData {
     },
     "linkedin": "https://www.linkedin.com/in/dayanecoronado",
     "location": "Santiago, Chile",
-    "avatar": "/avatar.jpg",
+    "avatar": "/avatar.webp",
     "yearsExperience": 13
   },
   "about": {
@@ -461,7 +461,7 @@ Los iconos `simple-icons:*` usan `currentColor` y deben recibir explícitamente 
 | NPM | `devicon:npm-wordmark` |
 | REST API | `devicon:swagger` |
 | JIRA | `simple-icons:jira` |
-| Service Now | SVG inline (ver nota abajo) |
+| ServiceNow | SVG inline (ver nota abajo) |
 | Git / GitHub | `devicon:git` |
 | Azure DevOps CI/CD pipelines | `simple-icons:azuredevops` |
 | Team Foundation Version Control (TFVC) | `devicon:visualstudio` |

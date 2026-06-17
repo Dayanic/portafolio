@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#2d0050"/>
+      <stop offset="55%"  stop-color="#180030"/>
+      <stop offset="100%" stop-color="#0d001a"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <clipPath id="avatarCircle">
+      <circle cx="940" cy="295" r="185"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect x="0" y="0" width="1200" height="10" fill="url(#barGrad)"/>
+
+  <!-- Avatar -->
+  <circle cx="940" cy="295" r="202" fill="#7c3aed" fill-opacity="0.07"/>
+  <circle cx="940" cy="295" r="192" fill="none" stroke="#7c3aed" stroke-width="1.5" opacity="0.35"/>
+  <circle cx="940" cy="295" r="187" fill="#0d001a"/>
+  <image href="/avatar.webp" x="755" y="110" width="370" height="370"
+         clip-path="url(#avatarCircle)" preserveAspectRatio="xMidYMid slice"/>
+
+  <!-- Nombre -->
+  <text x="80" y="115" font-size="56" font-family="system-ui,-apple-system,sans-serif"
+        font-weight="700" fill="#f1f5f9" letter-spacing="-0.5">Dayane Coronado</text>
+  <text x="80" y="183" font-size="56" font-family="system-ui,-apple-system,sans-serif"
+        font-weight="700" fill="#f1f5f9" letter-spacing="-0.5">Guzmán</text>
+
+  <!-- Título -->
+  <text x="80" y="236" font-size="22" font-family="system-ui,sans-serif"
+        fill="#c4b5fd" font-weight="500">Ingeniera en Informática · Computer Engineer</text>
+
+  <!-- Acento decorativo -->
+  <rect x="80" y="254" width="55" height="4" rx="2" fill="#7c3aed"/>
+
+  <!-- Roles en una línea -->
+  <text x="80" y="294" font-size="14" font-family="system-ui,sans-serif"
+        fill="#e2d9f3" letter-spacing="0.3">Technical Project Manager  ·  Senior Backend Developer  ·  Software Engineering Leader</text>
+
+  <!-- Label tecnologías -->
+  <text x="80" y="343" font-size="11" font-family="system-ui,sans-serif"
+        fill="#6b7280" letter-spacing="2.5">TECNOLOGÍAS</text>
+
+  <!-- 10 tech icons, r=26, spacing=63px -->
+  <circle cx="106" cy="390" r="26" fill="#e34f26"/>
+  <text x="106" y="396" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">HTML</text>
+
+  <circle cx="169" cy="390" r="26" fill="#f7df1e"/>
+  <text x="169" y="396" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle" fill="#1a1a1a">JS</text>
+
+  <circle cx="232" cy="390" r="26" fill="#9b4f96"/>
+  <text x="232" y="396" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">C#</text>
+
+  <circle cx="295" cy="390" r="26" fill="#512bd4"/>
+  <text x="295" y="396" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">.NET</text>
+
+  <circle cx="358" cy="390" r="26" fill="#3d1a8a"/>
+  <text x="358" y="393" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">.NET</text>
+  <text x="358" y="405" font-size="10" font-family="monospace" font-weight="700" text-anchor="middle" fill="#a78bfa">Core</text>
+
+  <circle cx="421" cy="390" r="26" fill="#00758f"/>
+  <text x="421" y="396" font-size="12" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">SQL</text>
+
+  <circle cx="484" cy="390" r="26" fill="#0078d4"/>
+  <text x="484" y="396" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">Azure</text>
+
+  <circle cx="547" cy="390" r="26" fill="#f05032"/>
+  <text x="547" y="396" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle" fill="white">Git</text>
+
+  <circle cx="610" cy="390" r="26" fill="#49cc90"/>
+  <text x="610" y="396" font-size="11" font-family="monospace" font-weight="700" text-anchor="middle" fill="#0d001a">REST</text>
+
+  <circle cx="673" cy="390" r="26" fill="#3776ab"/>
+  <text x="673" y="396" font-size="13" font-family="monospace" font-weight="700" text-anchor="middle" fill="#ffd43b">Py</text>
+
+  <!-- Separador -->
+  <rect x="80" y="510" width="620" height="1" fill="#7c3aed" fill-opacity="0.3"/>
+
+  <!-- Dominio -->
+  <text x="80" y="558" font-size="24" font-family="system-ui,sans-serif"
+        font-weight="600" fill="#8b5cf6">dayanestefania.com</text>
+</svg>

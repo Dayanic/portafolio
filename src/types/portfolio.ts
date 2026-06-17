@@ -31,7 +31,6 @@ export interface IAbout {
 
 export interface ITechnology {
   name: string;
-  category: 'backend' | 'frontend' | 'devops' | 'cloud' | 'database' | 'other';
 }
 
 export interface ISkillItem {

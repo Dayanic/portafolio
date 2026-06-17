@@ -26,10 +26,20 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     <meta property="og:image" content={`${esMeta.url}${esMeta.ogImage}`} />
     <meta property="og:url" content={esMeta.url} />
 
-    <!-- Canonical -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={esMeta.title} />
+    <meta name="twitter:description" content={esMeta.description} />
+    <meta name="twitter:image" content={`${esMeta.url}${esMeta.ogImage}`} />
+
+    <!-- Canonical & hreflang -->
     <link rel="canonical" href={esMeta.url} />
     <link rel="alternate" hreflang="es" href={esMeta.url} />
     <link rel="alternate" hreflang="en" href={esMeta.url} />
+    <link rel="alternate" hreflang="x-default" href={esMeta.url} />
+
+    <!-- Inyección de head por página (ej. JSON-LD) -->
+    <slot name="head" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

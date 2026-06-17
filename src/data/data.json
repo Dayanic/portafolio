@@ -9,7 +9,7 @@
       "en": "Professional portfolio of Dayane Coronado Guzmán, Technical Project Manager and Senior Backend Developer with over 13 years of experience."
     },
     "url": "https://dayanestefania.com",
-    "ogImage": "/og-image.jpg"
+    "ogImage": "/og-image.svg"
   },
   "hero": {
     "name": "Dayane Coronado Guzmán",
@@ -21,7 +21,7 @@
       "es": [
         "Líder de Proyectos Tecnológicos",
         "Líder de Ingeniería de Software",
-        "Desarrollador Back-End Senior"
+        "Desarrollador BackEnd Senior"
       ],
       "en": [
         "Technical Project Manager",
@@ -31,7 +31,7 @@
     },
     "linkedin": "https://www.linkedin.com/in/dayanecoronado",
     "location": "Santiago, Chile",
-    "avatar": "/avatar.jpg",
+    "avatar": "/avatar.webp",
     "yearsExperience": 13
   },
   "about": {
@@ -41,21 +41,21 @@
     }
   },
   "technologies": [
-    { "name": "HTML",                                        "category": "frontend"  },
-    { "name": "JavaScript",                                  "category": "frontend"  },
-    { "name": "C#",                                          "category": "backend"   },
-    { "name": "VB.NET",                                      "category": "backend"   },
-    { "name": "Oracle PL/SQL",                               "category": "database"  },
-    { "name": "SQL Server",                                  "category": "database"  },
-    { "name": "PostgreSQL",                                  "category": "database"  },
-    { "name": "NPM",                                         "category": "other"     },
-    { "name": "REST API",                                    "category": "other"     },
-    { "name": "JIRA",                                        "category": "devops"    },
-    { "name": "Service Now",                                 "category": "devops"    },
-    { "name": "Git / GitHub",                                "category": "devops"    },
-    { "name": "Azure DevOps CI/CD pipelines",                "category": "devops"    },
-    { "name": "Team Foundation Version Control (TFVC)",      "category": "devops"    },
-    { "name": "SVN (Subversion)",                            "category": "devops"    }
+    { "name": "HTML"                                        },
+    { "name": "JavaScript"                                  },
+    { "name": "C#"                                          },
+    { "name": "VB.NET"                                      },
+    { "name": "Oracle PL/SQL"                               },
+    { "name": "SQL Server"                                  },
+    { "name": "PostgreSQL"                                  },
+    { "name": "NPM"                                         },
+    { "name": "REST API"                                    },
+    { "name": "JIRA"                                        },
+    { "name": "ServiceNow"                                 },
+    { "name": "Git / GitHub"                                },
+    { "name": "Azure DevOps CI/CD pipelines"                },
+    { "name": "Team Foundation Version Control (TFVC)"      },
+    { "name": "SVN (Subversion)"                            }
   ],
   "skills": {
     "technical": [
@@ -145,7 +145,7 @@
         "en": "Personal portfolio development with Astro 6 (SSG), Tailwind CSS 4, and TypeScript. The site is fully data-driven: all content is managed from JSON files without touching component code. Includes bilingual support (ES/EN) with Astro's native i18n, FOUC-free dark/light theme system, scroll animations with IntersectionObserver, and automatic deployment on Vercel."
       },
       "role": {
-        "es": "Desarrolladora Full Stack",
+        "es": "Desarrollador Full Stack",
         "en": "Full Stack Developer"
       }
     }
